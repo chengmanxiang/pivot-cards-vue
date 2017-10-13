@@ -1,31 +1,32 @@
 <template>
   <div id="app">
-    <div class="todo board js-board">
+    <story-board>
       <h2 class="heading">To Do</h2>
       <p v-for="story in storiesOrganizer('unstarted')">{{story.name}}</p>
-    </div>
-    <div class="board js-board unscheduled">
+    </story-board>
+    <story-board>
       <h2 class="heading">Backlog</h2>
       <p v-for="story in storiesOrganizer('unscheduled')">{{story.name}}</p>
-    </div>
-    <div class="in-progress js-board board">
+    </story-board>
+    <story-board>
       <h2 class="heading">In Progress</h2>
       <p v-for="story in storiesOrganizer('started')">{{story.name}}</p>
-    </div>
-    <div class="ready-for-review js-board board">
+    </story-board>
+    <story-board>
       <h2 class="heading">Ready For Review</h2>
       <p v-for="story in storiesOrganizer('finished')">{{story.name}}</p>
-    </div>
+    </story-board>
+    <story-board>
     <h2 class="heading">Done</h2>
-    <div class="done js-board board">
       <p v-for="story in storiesOrganizer('accepted')">{{story.name}}</p>
-    </div>
+    </story-board>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import { config } from './keys.js';
+import storyBoard from './components/storyboard.vue';
 let myKey = config.MY_API_KEY;
 let myProjectId = config.MY_PROJECT_ID;
 let instance = axios.create({
@@ -58,6 +59,9 @@ export default {
       });
     }
   },
+  components: {
+    'story-board': storyBoard
+  },
   created: function () {
     this.getStories();
   }
@@ -65,12 +69,19 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: 5px;
 }
 </style>
