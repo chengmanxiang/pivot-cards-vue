@@ -1,25 +1,10 @@
 <template>
   <div id="app">
-    <story-board>
-      <h2 class="heading">To Do</h2>
-      <p v-for="story in storiesOrganizer('unstarted')">{{story.name}}</p>
-    </story-board>
-    <story-board>
-      <h2 class="heading">Backlog</h2>
-      <p v-for="story in storiesOrganizer('unscheduled')">{{story.name}}</p>
-    </story-board>
-    <story-board>
-      <h2 class="heading">In Progress</h2>
-      <p v-for="story in storiesOrganizer('started')">{{story.name}}</p>
-    </story-board>
-    <story-board>
-      <h2 class="heading">Ready For Review</h2>
-      <p v-for="story in storiesOrganizer('finished')">{{story.name}}</p>
-    </story-board>
-    <story-board>
-    <h2 class="heading">Done</h2>
-      <p v-for="story in storiesOrganizer('accepted')">{{story.name}}</p>
-    </story-board>
+    <story-board :stories="storiesOrganizer('unstarted')"></story-board>
+    <story-board :stories="storiesOrganizer('unscheduled')"></story-board>
+    <story-board :stories="storiesOrganizer('started')"></story-board>
+    <story-board :stories="storiesOrganizer('finished')"></story-board>
+    <story-board :stories="storiesOrganizer('accepted')"></story-board>
   </div>
 </template>
 

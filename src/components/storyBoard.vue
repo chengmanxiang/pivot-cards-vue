@@ -1,12 +1,20 @@
 <template>
   <div class="board">
-    <p class="heading"></p>
+    <story-card v-for="(item, i) in stories"
+    :story="item"
+    :key="i"
+    />
   </div>
 </template>
 
 <script>
+import storyCard from './storyCard.vue';
 export default {
-  name: 'storyBoard'
+  name: 'storyBoard',
+  props: ['stories'],
+  components: {
+    'story-card': storyCard
+  }
 
 };
 </script>
