@@ -1,13 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { config } from './keys.js'
+let myKey = config.MY_API_KEY
+let myProjectId = config.MY_PROJECT_ID
+let instance = axios.create({
+  baseURL: 'https://www.pivotaltracker.com/services/v5/projects/' + myProjectId + '/stories/',
+  timeout: 2000,
+  headers: { 'X-TrackerToken': myKey }
+})
+
 export default {
-  name: 'app'
+  name: 'MainApp',
+  data () {
+    return {
+      stories: []
+    }
+  }, // data
+  methods: {
+    getStories: function () {
+      instance.get()
+      .then((response) => {
+        this.stories = response.data
+        console.log(this.stories)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+  },
+  mounted: function () {
+    this.getStories()
+  }
 }
 </script>
 
