@@ -1,7 +1,7 @@
 <template>
     <div class="card">
-        <p>{{story.name}}</p>
-      </a>
+      <a :href="story.url">{{story.name}}</a>
+      <img :src="getPic(story['owned_by_id'])">
     </div>
 </template>
 
@@ -10,8 +10,17 @@
 export default {
   name: 'storyCard',
 
-  props: ['story']
+  props: ['story'],
 
+  methods: {
+    getPic: function (id) {
+      if (id === 2977522) {
+        return 'http://www.gravatar.com/avatar/89757308cf4f81abdf9fc8bd46b3eb7e?r=g&s=30';
+      } else if (id === 148385) {
+        return 'http://www.gravatar.com/avatar/b15df0beef5d497cbc1532104529318f?r=g&s=30';
+      } else return 'http://www.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?r=g&s=30';
+    }
+  }
 }; // export
 </script>
 
@@ -25,7 +34,6 @@ a {
 a:hover {
   text-decoration: underline;
   color: #669bbc;
-  /* cursor: pointer; */
 }
 
 .bug {
@@ -48,3 +56,8 @@ a:hover {
   position: relative;
 }
 </style>
+
+
+// todd gravatar url - http://www.gravatar.com/avatar/89757308cf4f81abdf9fc8bd46b3eb7e?r=g&s=30
+// andrew gravatar url - http://www.gravatar.com/avatar/b15df0beef5d497cbc1532104529318f?r=g&s=30
+// nobody - http://www.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?r=g&s=30
