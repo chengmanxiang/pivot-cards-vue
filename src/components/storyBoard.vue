@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <p class="heading" v-text="getHeading(stories[0]['current_state'])"></p>
+    <p class="heading" v-text="getHeading(stories)"></p>
     <story-card v-for="(item, i) in stories"
     :story="item"
     :key="i"
@@ -18,12 +18,11 @@ export default {
   },
   methods: {
     getHeading: function (state) {
-      console.log(state);
-      if (state === 'unscheduled') return 'Backlog';
-      if (state === 'unstarted') return 'To Do';
-      if (state === 'started') return 'In Progress';
-      if (state === 'finished') return 'Ready For Review';
-      if (state === 'accepted') return 'Done';
+      if (state[0]['current_state'] === 'unstarted') return 'To Do';
+      if (state[0]['current_state'] === 'unscheduled') return 'Backlog';
+      if (state[0]['current_state'] === 'started') return 'In Progress';
+      if (state[0]['current_state'] === 'finished') return 'Ready For Review';
+      if (state[0]['current_state'] === 'accepted') return 'Done';
     }
   }
 };

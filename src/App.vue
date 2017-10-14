@@ -32,7 +32,6 @@ export default {
       instance.get()
         .then((response) => {
           this.stories = response.data;
-          console.log(this.stories);
         })
         .catch((error) => {
           console.log(error);
