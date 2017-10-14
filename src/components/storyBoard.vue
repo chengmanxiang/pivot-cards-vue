@@ -1,5 +1,6 @@
 <template>
   <div class="board">
+    <p class="heading" v-text="getHeading(stories[0]['current_state'])"></p>
     <story-card v-for="(item, i) in stories"
     :story="item"
     :key="i"
@@ -14,8 +15,17 @@ export default {
   props: ['stories'],
   components: {
     'story-card': storyCard
+  },
+  methods: {
+    getHeading: function (state) {
+      console.log(state);
+      if (state === 'unscheduled') return 'Backlog';
+      if (state === 'unstarted') return 'To Do';
+      if (state === 'started') return 'In Progress';
+      if (state === 'finished') return 'Ready For Review';
+      if (state === 'accepted') return 'Done';
+    }
   }
-
 };
 </script>
 
@@ -37,4 +47,5 @@ export default {
   background-image: linear-gradient(#82a8bf, #669bbc);
   color: white;
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-      <a :href="story.url">{{story.name}}</a>
+      <a class="name" :href="story.url">{{story.name}}</a>
       <img :src="getPic(story['owned_by_id'])">
     </div>
 </template>
@@ -54,6 +54,18 @@ a:hover {
   box-shadow: 1px 1px 2px #888;
   overflow: auto;
   position: relative;
+}
+
+.name {
+  margin: 12px 0 5px 12px;
+  padding: 5px;
+  text-align: left;
+}
+
+img {
+  float: left;
+  border-radius: 50%;
+  margin: 0px 0px 8px 12px;
 }
 </style>
 
