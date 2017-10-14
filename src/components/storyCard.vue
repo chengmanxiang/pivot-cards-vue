@@ -1,7 +1,9 @@
 <template>
-    <div class="card">
-      <a class="name" :href="story.url">{{story.name}}</a>
+    <div :class="story.story_type" class="card">
+      <a :href="story.url"><p class="name">{{story.name}}</p></a>
       <img :src="getPic(story['owned_by_id'])">
+      <p class='estimate' v-if="story.estimate > 0">{{story.estimate}}</p>
+      <p :class="story.current_state" class="status-badge">{{story.current_state}}</p>
     </div>
 </template>
 
@@ -67,6 +69,60 @@ img {
   border-radius: 50%;
   margin: 0px 0px 8px 12px;
 }
+
+.estimate {
+  font-size: 0.75rem;
+  min-width: 13px;
+  float: right;
+  background: #9ED1E4;
+  color: #FCFCFC;
+  position: absolute;
+  bottom: 1px;
+  right: 12px;
+  border-radius: 100%;
+  padding: 4px;
+  text-align: center;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  float: right;
+  color: #555;
+  padding: 4px 8px 6px 8px;
+  border-radius: 50vh;
+  position: absolute;
+  bottom: 0;
+  right: 40px;
+}
+
+.accepted {
+  background: #D9EFD1;
+}
+
+.started {
+  background: #F3F3D4;
+}
+
+.unstarted {
+  background: #F4F4F4;
+}
+
+.unscheduled {
+  background: #F4F4F4;
+}
+
+.finished {
+  background: #E4EFF7;
+}
+
+.rejected {
+  background: #F08B89;
+}
+
+p {
+  font-size: 1rem;
+}
+
 </style>
 
 

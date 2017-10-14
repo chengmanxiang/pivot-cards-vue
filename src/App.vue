@@ -53,10 +53,6 @@ export default {
 </script>
 
 <style>
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-}
 
 #app {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -93,6 +89,25 @@ body {
 .done {
   grid-column: 4/5;
   grid-row: 1/7;
+}
+
+@media only screen and (max-width: 750px) {
+  #app {
+    grid-template-columns: 1fr;
+  }
+
+  .in-progress {
+    grid-column: 1/2;
+    grid-row: auto;
+  }
+  .ready-for-review {
+    grid-column: 1/2;
+    grid-row: auto;
+  }
+  .done {
+    grid-column: 1/2;
+    grid-row: auto;
+  }
 }
 
 </style>
