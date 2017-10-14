@@ -10,8 +10,9 @@
 
 <script>
 import axios from 'axios';
-import { config } from './keys.js';
-import storyBoard from './components/storyboard.vue';
+import { config } from '../assets/keys.js';
+import storyBoard from './storyboard.vue';
+import store from '../store';
 let myKey = config.MY_API_KEY;
 let myProjectId = config.MY_PROJECT_ID;
 let instance = axios.create({
@@ -22,6 +23,7 @@ let instance = axios.create({
 
 export default {
   name: 'MainApp',
+  store,
   data () {
     return {
       stories: []
@@ -31,7 +33,7 @@ export default {
     getStories: function () {
       instance.get()
         .then((response) => {
-          this.stories = response.data;
+          this.$store.commit('getData', response.data);
         })
         .catch((error) => {
           console.log(error);
