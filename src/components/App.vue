@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <story-board class="todo" :stories="todos"></story-board>
-    <story-board class="backlog" :stories="backlog"></story-board>
-    <story-board class="in-progress" :stories="inProgress"></story-board>
-    <story-board class="ready-for-review" :stories="readyForReview"></story-board>
-    <story-board class="done" :stories="done"></story-board>
+    <story-board class="todo" text="To Do" :stories="todos"></story-board>
+    <story-board class="backlog" text="Backlog" :stories="backlog"></story-board>
+    <story-board class="in-progress" text="In Progress" :stories="inProgress"></story-board>
+    <story-board class="ready-for-review" text="Ready For Review" :stories="readyForReview"></story-board>
+    <story-board class="done" text="Done" :stories="done"></story-board>
   </div>
 </template>
 

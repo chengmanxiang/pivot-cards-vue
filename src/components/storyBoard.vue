@@ -1,6 +1,6 @@
 <template>
   <div class="board">
-    <p class="heading"></p>
+    <p class="heading">{{text}}</p>
     <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   components: {
     'story-card': storyCard
   },
-  props: ['stories']
+  props: ['stories', 'text']
 };
 </script>
 
