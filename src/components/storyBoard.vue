@@ -1,28 +1,20 @@
 <template>
   <div class="board">
-    <p class="heading" v-text="getHeading(stories)"></p>
-      <story-card v-for="(item, i) in stories" :story="item" :key="i"/>
+    <p class="heading"></p>
+    <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
   </div>
 </template>
 
 <script>
-import storyCard from './storyCard.vue';
-
+import store from '../store';
+import storyCard from './storyCard';
 export default {
   name: 'storyBoard',
-  props: ['stories'],
+  store,
   components: {
     'story-card': storyCard
   },
-  methods: {
-    getHeading: function (story) {
-      if (story[0]['current_state'] === 'unstarted') return 'To Do';
-      if (story[0]['current_state'] === 'unscheduled') return 'Backlog';
-      if (story[0]['current_state'] === 'started') return 'In Progress';
-      if (story[0]['current_state'] === 'finished') return 'Ready For Review';
-      if (story[0]['current_state'] === 'accepted') return 'Done';
-    }
-  }
+  props: ['stories']
 };
 </script>
 

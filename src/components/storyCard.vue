@@ -126,6 +126,3 @@ p {
 </style>
 
 
-// todd gravatar url - http://www.gravatar.com/avatar/89757308cf4f81abdf9fc8bd46b3eb7e?r=g&s=30
-// andrew gravatar url - http://www.gravatar.com/avatar/b15df0beef5d497cbc1532104529318f?r=g&s=30
-// nobody - http://www.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?r=g&s=30
