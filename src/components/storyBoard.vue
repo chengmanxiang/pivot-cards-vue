@@ -1,18 +1,20 @@
 <template>
   <div class="board">
     <p class="heading">{{text}}</p>
-    <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
+    <draggable :list="stories" class="draggable-list" :options="{group:'cards'}">
+      <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
+    </draggable>
   </div>
 </template>
 
 <script>
-import store from '../store';
 import storyCard from './storyCard';
+import draggable from 'vuedraggable';
 export default {
   name: 'storyBoard',
-  store,
   components: {
-    'story-card': storyCard
+    'story-card': storyCard,
+    draggable
   },
   props: ['stories', 'text']
 };

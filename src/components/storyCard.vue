@@ -1,19 +1,19 @@
 <template>
+  
     <div :class="story.story_type" class="card">
       <a :href="story.url"><p class="name">{{story.name}}</p></a>
       <img :src="getPic(story['owned_by_id'])">
       <p class='estimate' v-if="story.estimate > 0">{{story.estimate}}</p>
       <p :class="story.current_state" class="status-badge">{{story.current_state}}</p>
     </div>
+  
 </template>
 
 <script>
 
 export default {
   name: 'storyCard',
-
   props: ['story'],
-
   methods: {
     getPic: function (id) {
       if (id === 2977522) {

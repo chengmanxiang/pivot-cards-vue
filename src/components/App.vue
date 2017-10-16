@@ -1,47 +1,77 @@
 <template>
   <div id="app">
-    <story-board class="todo" text="To Do" :stories="todos"></story-board>
-    <story-board class="backlog" text="Backlog" :stories="backlog"></story-board>
-    <story-board class="in-progress" text="In Progress" :stories="inProgress"></story-board>
-    <story-board class="ready-for-review" text="Ready For Review" :stories="readyForReview"></story-board>
-    <story-board class="done" text="Done" :stories="done"></story-board>
+    <story-board id="todo" class="todo" text="To Do" :stories="todos"></story-board>
+    <story-board id="backlog" class="backlog" text="Backlog" :stories="backlog"></story-board>
+    <story-board id="inProgress" class="in-progress" text="In Progress" :stories="inProgress"></story-board>
+    <story-board id="readyForReview" class="ready-for-review" text="Ready For Review" :stories="readyForReview"></story-board>
+    <story-board id="done" class="done" text="Done" :stories="done"></story-board>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import { config } from '../assets/keys.js';
 import storyBoard from './storyboard.vue';
-import store from '../store';
+const myKey = config.MY_API_KEY;
+const myProjectId = config.MY_PROJECT_ID;
+const instance = axios.create({
+  baseURL: 'https://www.pivotaltracker.com/services/v5/projects/' + myProjectId + '/stories/',
+  timeout: 2000,
+  headers: { 'X-TrackerToken': myKey }
+});
+
 export default {
   name: 'MainApp',
-  store,
+  data () {
+    return {
+      todos: [],
+      backlog: [],
+      inProgress: [],
+      readyForReview: [],
+      done: []
+    };
+  },
   components: {
     'story-board': storyBoard
   },
-  created: function () {
-    this.$store.dispatch('loadStories');
-  },
-  computed: {
-    todos () {
-      return store.getters.todos;
-    },
-    backlog () {
-      return store.getters.backlog;
-    },
-    inProgress () {
-      return store.getters.inProgress;
-    },
-    readyForReview () {
-      return store.getters.readyForReview;
-    },
-    done () {
-      return store.getters.done;
+  methods: {
+    getStories () {
+      instance.get()
+      .then(response => {
+        console.log(response.data);
+        response.data.forEach(story => {
+          console.log(story['current_state']);
+          switch (story['current_state']) {
+            case 'unstarted':
+              this.todos.push(story);
+              break;
+            case 'unscheduled':
+              this.backlog.push(story);
+              break;
+            case 'started':
+              this.inProgress.push(story);
+              break;
+            case 'finished':
+              this.readyForReview.push(story);
+              break;
+            case 'accepted':
+              this.done.push(story);
+              break;
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     }
+  },
+  created: function () {
+    this.getStories();
   }
 };
 </script>
 
 <style>
-
 #app {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -88,14 +118,15 @@ export default {
     grid-column: 1/2;
     grid-row: auto;
   }
+
   .ready-for-review {
     grid-column: 1/2;
     grid-row: auto;
   }
+
   .done {
     grid-column: 1/2;
     grid-row: auto;
   }
 }
-
 </style>
