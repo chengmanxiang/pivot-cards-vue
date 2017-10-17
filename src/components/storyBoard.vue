@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <p class="heading">{{text}}</p>
-    <draggable :list="stories" class="draggable-list" :options="{group:'cards'}">
+    <draggable :list="stories" class="draggable-list" :move="checkMove" :options="{group:'cards'}">
       <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
     </draggable>
   </div>
@@ -15,6 +15,13 @@ export default {
   components: {
     'story-card': storyCard,
     draggable
+  },
+  methods: {
+    checkMove (evt) {
+      console.log(evt);
+      // :move (evt.draggedContext.element['story_type'] === 'chore' )
+      // @end ((evt.clone.classList[1] === 'chore')
+    }
   },
   props: ['stories', 'text']
 };
@@ -40,7 +47,7 @@ export default {
 }
 
 .draggable-list {
-  min-height: 175px;
+  padding-bottom: 55px;
   display: block;
 }
 

@@ -38,9 +38,7 @@ export default {
     getStories () {
       instance.get()
       .then(response => {
-        console.log(response.data);
         response.data.forEach(story => {
-          console.log(story['current_state']);
           switch (story['current_state']) {
             case 'unstarted':
               this.todos.push(story);
