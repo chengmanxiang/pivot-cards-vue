@@ -39,4 +39,9 @@ export default {
   color: white;
 }
 
+.draggable-list {
+  min-height: 175px;
+  display: block;
+}
+
 </style>

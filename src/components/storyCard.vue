@@ -56,6 +56,8 @@ a:hover {
   box-shadow: 1px 1px 2px #888;
   overflow: auto;
   position: relative;
+  min-height: 80px;
+  display: block;
 }
 
 .name {
