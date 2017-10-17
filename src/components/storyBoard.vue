@@ -1,7 +1,7 @@
 <template>
   <div class="board">
     <p class="heading">{{text}}</p>
-    <draggable :list="stories" class="draggable-list" :move="checkMove" :options="{group:'cards'}">
+    <draggable :list="stories" :data-id="id" class="draggable-list" :move="checkMove" :options="{group:'cards'}">
       <story-card v-for="(item, index) in stories" :story="item" :key="index"></story-card>
     </draggable>
   </div>
@@ -18,12 +18,26 @@ export default {
   },
   methods: {
     checkMove (evt) {
-      console.log(evt);
-      // :move (evt.draggedContext.element['story_type'] === 'chore' )
-      // @end ((evt.clone.classList[1] === 'chore')
+      switch (evt.relatedContext.component._uid) {
+        case 3:
+          (evt.dragged._underlying_vm_.current_state = 'unstarted');
+          break;
+        case 5:
+          (evt.dragged._underlying_vm_.current_state = 'unscheduled');
+          break;
+        case 7:
+          (evt.dragged._underlying_vm_.current_state = 'started');
+          break;
+        case 9:
+          (evt.dragged._underlying_vm_.current_state = 'finished');
+          break;
+        case 11:
+          (evt.dragged._underlying_vm_.current_state = 'accepted');
+          break;
+      }
     }
   },
-  props: ['stories', 'text']
+  props: ['stories', 'text', 'id']
 };
 </script>
 
