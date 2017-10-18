@@ -47,6 +47,10 @@ export default {
   padding: 5px;
 }
 
+.sortable-ghost {
+  visibility: hidden;
+}
+
 .heading {
   margin-top: 0;
   padding: 10px 10px;
